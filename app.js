@@ -27,7 +27,9 @@ app.get('/', (req,res) => {
 app.post('/:login', (req,res) => {
   queries.createAccount(req.body)
   .then(function(user){
-    res.status(201).json(user)
+    res.render('login', {
+      test: user
+    })
   })
   .catch(function(err){
     res.status(500).send(err)
