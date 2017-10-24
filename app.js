@@ -11,7 +11,7 @@ app.set('view engine', 'hbs');
 app.use(express.static('public'))
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
-app.use(express.static('public'))
+
 
 
 app.get('/', (req,res) => {
@@ -37,7 +37,27 @@ app.post('/:login', (req,res) => {
 })
 
 
+app.get('/login', (req,res)=>{
+  res.render('login')
+})
 
+app.get('/:genre', (req,res)=> {
+  const genre = req.params.genre
+  queries.getStories(genre)
+  .then(stories => {
+    for (var i = 0; i < stories.length; i++) {
+      const author = stories[i].user_id;
+      queries.getAuthor(author)
+      .then(writers => {
+        res.render('genre', {
+          genre: genre,
+          writers: writers
+        })
+
+      })
+    }
+  })
+})
 
 app.listen(port, () => {
   console.log('Listening on port:', port);

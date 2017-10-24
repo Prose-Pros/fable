@@ -2,10 +2,17 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>Fable: {{genre}}</title>
+    <link rel="stylesheet" href="./stylesheets/style.css">
   </head>
   <body>
-
+    <h2>{{genre}}</h2>
+    <div class="genreStories">
+      <h4>Stories</h4>
+      {{#each writers}}
+        <p>Title: {{title}}, Author: {{username}}</p>
+      {{/each}}
+    </div>
     <!-- see all stories under one genre -->
 
   </body>
