@@ -8,7 +8,7 @@
   </head>
   <body>
     <aside class="create-login">
-      <button type="button" name="button">Create Account | Login</button>
+      <a href="/login"><button type="button" name="button">Create Account | Login</button></a>
     </aside>
     <main>
       <section class="splash">
@@ -19,9 +19,9 @@
       <section class="index-genres">
         <h4>Genres</h4>
         {{#each dataGenres}}
-        <button>
-          <a href="/{{genre}}">{{genre}}</a>
-        </button>
+        <a href="/{{genre}}">
+          <button>{{genre}}</button>
+        </a>
         {{/each}}
 
       </section>
