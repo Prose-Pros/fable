@@ -6,6 +6,9 @@ const queries = require('./db/queries')
 const routes = require('./routes/createlogin')
 const prompts = require('./prompts')
 
+let user = false;
+let currentUser = "";
+
 
 app.set('view engine', 'hbs');
 app.use(express.static('public'))
@@ -17,10 +20,18 @@ app.use(bodyParser.json())
 app.get('/', (req,res) => {
   queries.getGenres()
   .then(dataGenres => {
-    res.render('index', {
-      title: 'Fable',
-      dataGenres: dataGenres
-    })
+    if (user === false) {
+      res.render('index', {
+        title: 'Fable',
+        dataGenres: dataGenres
+      })
+    } else {
+      res.render('index', {
+        title: 'Fable',
+        dataGenres: dataGenres,
+        currentUser: currentUser
+      })
+    }
   })
 })
 
@@ -33,6 +44,24 @@ app.post('/:login', (req,res) => {
   })
   .catch(function(err){
     res.status(500).send(err)
+  })
+})
+
+app.post('/login/user', (req,res)=>{
+  const username = req.body.username;
+  const code = req.body.code;
+  queries.login(username)
+  .then(userInfo => {
+    if(userInfo[0].code == code) {
+      user = true;
+      currentUser = userInfo[0]
+      res.redirect('/')
+    } else {
+      res.sendStatus(401);
+    }
+  })
+  .catch(err => {
+    res.sendStatus(500)
   })
 })
 
