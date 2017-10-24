@@ -28,11 +28,15 @@ function createCode(){
   return code
 }
 
+function login(username) {
+  return db('users').select().where('username', username)
+}
 
 
 
 
 module.exports = {
+  login: login,
   getAuthor: getAuthor,
   getStories: getStories,
   getGenres: getGenres,
