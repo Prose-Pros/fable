@@ -6,6 +6,11 @@
   </head>
   <body>
     <h1>{{title}}</h1>
+    <div class="homeGenreList">
+      {{#each dataGenres}}
+        <a href="/{{genre}}">{{genre}}</a>
+      {{/each}}
+    </div>
     <script type="text/javascript" src="./app.js"></script>
   </body>
 </html>

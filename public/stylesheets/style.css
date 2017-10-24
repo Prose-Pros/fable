@@ -1,0 +1,4 @@
+.homeGenreList {
+  display: flex;
+  flex-direction: row;
+}

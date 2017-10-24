@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser')
 const app = express();
 const port = process.env.PORT || 3000;
+const queries = require('./db/queries')
 
 app.set('view engine', 'hbs');
 
@@ -11,8 +12,12 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 app.get('/', (req,res) => {
-  res.render('index', {
-    title: 'Fable'
+  queries.getGenres()
+  .then(dataGenres => {
+    res.render('index', {
+      title: 'Fable',
+      dataGenres: dataGenres
+    })
   })
 })
 
