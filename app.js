@@ -36,11 +36,8 @@ app.post('/:login', (req,res) => {
   })
 })
 
-
-app.get('/:login', (req,res) => {
-  res.render('login', {
-    title: 'Create an Account or Log in'
-  })
+app.get('/login', (req,res)=>{
+  res.render('login')
 })
 
 app.get('/:genre', (req,res)=> {
@@ -60,20 +57,6 @@ app.get('/:genre', (req,res)=> {
     }
   })
 })
-
-app.get('/:write', (req,res) => {
-  res.render('write', {
-    title: 'Write a Story',
-    prompts: prompts
-  })
-})
-
-app.get('/:profile', (req,res) => {
-  res.render('profile', {
-    title: 'Profile'
-  })
-})
-
 
 app.listen(port, () => {
   console.log('Listening on port:', port);
