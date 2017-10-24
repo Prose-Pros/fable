@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>{{title}}</title>
+    <link rel='stylesheet' href='./stylesheets/style.css'>
+  </head>
+  <body>
+
+    <div class='storyHead'>
+      <h2>{{title}}</h2>
+      <p>Need some inspiration?</p>
+
+        <form id='prompt'>
+          <button type='submit'>Prompt Me</button>
+        </form>
+        <div class='promptDiv'>
+          <p>{{prompt}}</p>
+      </div>
+    </div>
+
+<div class='newStory'>
+
+    <form id='storyForm'>
+      <lable>Title</label>
+        <input class='storyInput' type='text' name='title' value=''>
+      <label>Author</label>
+      <!-- possible to autofill user's username? -->
+        <input class='storyInput' type='text' name='user' value=''>
+      <label>Genre</label>
+          <select>
+            <option value="fantasy">Fantasy</option>
+            <option value="horro">Horror</option>
+            <option value="mystery">Mystery</option>
+            <option value="satire">Satire</option>
+            <option value="sci-fi">Sci-Fi</option>
+            <option value="romance">Romance</option>
+            <option value="nonfiction">Nonfiction</option>
+            <option value="miscellaneous">Miscellaneous</option>
+          </select></br>
+      <label class='storyInput'>Story</label>
+        <textarea form='newStory' name='story' rows="20" cols="80" value=''></textarea>
+        <button type='submit'>Post</button>
+    </form>
+
+  </div>
+
+<script src='index.js'></script>
+ <!-- <script src='app.js'></script> -->
+  </body>
+</html>
