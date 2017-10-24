@@ -3,13 +3,13 @@ const bodyParser = require('body-parser')
 const app = express();
 const port = process.env.PORT || 3000;
 const queries = require('./db/queries')
+const routes = require('./routes/createlogin')
 const prompts = require('./prompts')
+
 
 app.set('view engine', 'hbs');
 app.use(express.static('public'))
-//application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
-// parse application/json
 app.use(bodyParser.json())
 app.use(express.static('public'))
 
@@ -24,25 +24,35 @@ app.get('/', (req,res) => {
   })
 })
 
-app.get('/login.hbs', (req,res) => {
+app.post('/:login', (req,res) => {
+  queries.createAccount(req.body)
+  .then(function(user){
+    res.status(201).json(user)
+  })
+  .catch(function(err){
+    res.status(500).send(err)
+  })
+})
+
+
+app.get('/:login', (req,res) => {
   res.render('login', {
     title: 'Create an Account or Log in'
   })
 })
 
-app.get('/write.hbs', (req,res) => {
+app.get('/:write', (req,res) => {
   res.render('write', {
     title: 'Write a Story',
     prompts: prompts
   })
 })
 
-app.get('/profile.hbs', (req,res) => {
+app.get('/:profile', (req,res) => {
   res.render('profile', {
     title: 'Profile'
   })
 })
-
 
 
 
