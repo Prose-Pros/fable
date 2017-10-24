@@ -54,3 +54,88 @@ footer p {
   letter-spacing: normal;
   font-style: italic;
 }
+
+#createForm, #loginForm {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+}
+
+.create, .login {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  width: 50vw;
+}
+
+.createLogin {
+  display: flex;
+  flex-direction: row;
+  height: 50vh;
+  align-items: center;
+}
+
+button {
+  width: 100px;
+  height: 30px;
+  background-color: #38453D;
+  color: #E3E5DE;
+  border: none;
+  border-radius: 4px;
+  margin: 4px;
+}
+
+input {
+  border-radius: 2px;
+  height: 20px;
+  /*width: 600px;*/
+}
+
+label {
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+
+textarea {
+  width: 600px;
+  height: 280px;
+}
+
+.storyInput {
+  border-radius: 2px;
+  height: 20px;
+  width: 600px;
+}
+
+#storyForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 500px;
+  align-items: center;
+  /*height: 100vh;*/
+}
+
+.newStory {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  margin-left: 10px;
+  margin-top: 20px;
+}
+
+.storyHead {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+a {
+  text-decoration: none;
+  color: #E3E5DE;
+}
+
+button:hover {
+  background-color: #5B735D;
+}
