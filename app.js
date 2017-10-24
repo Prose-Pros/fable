@@ -3,7 +3,7 @@ const bodyParser = require('body-parser')
 const app = express();
 const port = process.env.PORT || 3000;
 const queries = require('./db/queries')
-const routes = require('./routes/createlogin')
+const routes = require('./routes/createLogin')
 const prompts = require('./prompts')
 
 
@@ -27,30 +27,12 @@ app.get('/', (req,res) => {
 app.post('/:login', (req,res) => {
   queries.createAccount(req.body)
   .then(function(user){
-    res.status(201).json(user)
+    res.render('login', {
+      test: user
+    })
   })
   .catch(function(err){
     res.status(500).send(err)
-  })
-})
-
-
-app.get('/:login', (req,res) => {
-  res.render('login', {
-    title: 'Create an Account or Log in'
-  })
-})
-
-app.get('/:write', (req,res) => {
-  res.render('write', {
-    title: 'Write a Story',
-    prompts: prompts
-  })
-})
-
-app.get('/:profile', (req,res) => {
-  res.render('profile', {
-    title: 'Profile'
   })
 })
 
