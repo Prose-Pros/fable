@@ -18,14 +18,12 @@
       <hr>
       <section class="index-genres">
         <h4>Genres</h4>
-        <button type="button" name="button">Fantasy</button>
-        <button type="button" name="button">Horror</button>
-        <button type="button" name="button">Kids</button>
-        <button type="button" name="button">Mystery</button>
-        <button type="button" name="button">Romance</button>
-        <button type="button" name="button">Satire</button>
-        <button type="button" name="button">Sci-Fi</button>
-        <button type="button" name="button">Miscellaneous</button>
+        {{#each dataGenres}}
+        <button>
+          <a href="/{{genre}}">{{genre}}</a>
+        </button>
+        {{/each}}
+
       </section>
       <footer>
         <p>"Aliquam scelerisque sagittis sapien ut tincidunt. Cras et sem vel velit aliquam accumsan." - Unknown</p>
