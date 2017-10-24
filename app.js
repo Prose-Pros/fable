@@ -11,7 +11,7 @@ app.use(express.static('public'))
 app.use(bodyParser.urlencoded({ extended: false }))
 // parse application/json
 app.use(bodyParser.json())
-app.use(express.static('public'))
+
 
 
 app.get('/', (req,res) => {
@@ -29,6 +29,26 @@ app.get('/login.hbs', (req,res) => {
     title: 'Create an Account or Log in'
   })
 })
+
+app.get('/:genre', (req,res)=> {
+  const genre = req.params.genre
+  queries.getStories(genre)
+  .then(stories => {
+    for (var i = 0; i < stories.length; i++) {
+      const author = stories[i].user_id;
+      queries.getAuthor(author)
+      .then(writers => {
+        res.render('genre', {
+          genre: genre,
+          writers: writers
+        })
+
+      })
+    }
+  })
+})
+
+
 
 app.get('/write.hbs', (req,res) => {
   res.render('write', {
