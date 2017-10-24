@@ -30,6 +30,14 @@ app.get('/login.hbs', (req,res) => {
   })
 })
 
+app.get('/:genre', (req,res)=> {
+  const genre = req.params.genre
+
+  res.render('genre', {
+    genre: genre
+  })
+})
+
 app.get('/write.hbs', (req,res) => {
   res.render('write', {
     title: 'Write a Story',
