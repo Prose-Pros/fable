@@ -6,7 +6,7 @@ const queries = require('./db/queries')
 const routes = require('./routes/createLogin')
 const prompts = require('./prompts')
 
-let user = false;
+let loggedIn = false;
 let currentUser = "";
 
 
@@ -20,16 +20,18 @@ app.use(bodyParser.json())
 app.get('/', (req,res) => {
   queries.getGenres()
   .then(dataGenres => {
-    if (user === false) {
+    if (loggedIn === false) {
       res.render('index', {
         title: 'Fable',
-        dataGenres: dataGenres
+        dataGenres: dataGenres,
+        loggedIn: loggedIn,
       })
     } else {
       res.render('index', {
         title: 'Fable',
         dataGenres: dataGenres,
-        currentUser: currentUser
+        loggedIn: loggedIn,
+        currentUser: currentUser,
       })
     }
   })
@@ -37,9 +39,9 @@ app.get('/', (req,res) => {
 
 app.post('/:login', (req,res) => {
   queries.createAccount(req.body)
-  .then(function(user){
+  .then(function(code){
     res.render('login', {
-      test: user
+      code: code
     })
   })
   .catch(function(err){
@@ -54,7 +56,7 @@ app.post('/login/user', (req,res)=>{
   queries.login(username)
   .then(userInfo => {
     if(userInfo[0].code == code) {
-      user = true;
+      loggedIn = true;
       currentUser = userInfo[0]
       res.redirect('/')
     } else {

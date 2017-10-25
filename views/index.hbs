@@ -8,8 +8,13 @@
   </head>
   <body>
     <aside class="create-login">
-      <a href="/login"><button type="button" name="button">Create Account | Login</button></a>
+      {{#if loggedIn}}
+      <a href="/"><button type="button" name="button">Logout</button></a>
       <span>{{currentUser.username}}</span>
+      {{else}}
+      <a href="/login"><button type="button" name="button">Create Account</button></a>
+      <a href="/login"><button type="button" name="button">Login</button></a>
+      {{/if}}
     </aside>
     <main>
       <section class="splash">
