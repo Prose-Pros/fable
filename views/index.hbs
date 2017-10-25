@@ -9,7 +9,9 @@
   <body>
     <aside class="create-login">
       {{#if loggedIn}}
-      <a href="/"><button type="button" name="button">Logout</button></a>
+      <form class="" action="/logout?_method=PUT" method="post">
+        <a href="/"><button type="submit" name="button">Logout</button></a>
+      </form>
       <span>{{currentUser.username}}</span>
       {{else}}
       <a href="/login"><button type="button" name="button">Create Account</button></a>

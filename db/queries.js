@@ -32,7 +32,11 @@ function login(username) {
   return db('users').select().where('username', username)
 }
 
-
+function logout(loggedIn) {
+  return db('users').select().where('loggedIn', loggedIn).update({
+    loggedIn: false
+  })
+}
 
 
 module.exports = {

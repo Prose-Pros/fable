@@ -6,6 +6,7 @@ exports.up = function(knex, Promise) {
       table.string('username').notNullable()
       table.string('email').notNullable()
       table.string('code')
+      table.boolean('loggedIn').defaultTo('false')
     })
   ])
 };
