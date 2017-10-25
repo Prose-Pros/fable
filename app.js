@@ -6,6 +6,9 @@ const queries = require('./db/queries')
 const routes = require('./routes/createLogin')
 const prompts = require('./prompts')
 
+let user = false;
+let currentUser = "";
+
 
 app.set('view engine', 'hbs');
 app.use(express.static('public'))
@@ -17,10 +20,18 @@ app.use(bodyParser.json())
 app.get('/', (req,res) => {
   queries.getGenres()
   .then(dataGenres => {
-    res.render('index', {
-      title: 'Fable',
-      dataGenres: dataGenres
-    })
+    if (user === false) {
+      res.render('index', {
+        title: 'Fable',
+        dataGenres: dataGenres
+      })
+    } else {
+      res.render('index', {
+        title: 'Fable',
+        dataGenres: dataGenres,
+        currentUser: currentUser
+      })
+    }
   })
 })
 
@@ -37,9 +48,40 @@ app.post('/:login', (req,res) => {
 })
 
 
+app.post('/login/user', (req,res)=>{
+  const username = req.body.username;
+  const code = req.body.code;
+  queries.login(username)
+  .then(userInfo => {
+    if(userInfo[0].code == code) {
+      user = true;
+      currentUser = userInfo[0]
+      res.redirect('/')
+    } else {
+      res.sendStatus(401);
+    }
+  })
+  .catch(err => {
+    res.sendStatus(500)
+  })
+})
+
+
 app.get('/login', (req,res)=>{
   res.render('login')
 })
+
+app.get('/write', (req,res) => {
+  res.render('write')
+})
+
+app.post('/write/createStory', (req,res) => {
+  queries.newStory(req.body)
+  .then(function(story){
+    res.json(story)
+  })
+})
+
 
 app.get('/:genre', (req,res)=> {
   const genre = req.params.genre
@@ -58,6 +100,9 @@ app.get('/:genre', (req,res)=> {
     }
   })
 })
+
+
+
 
 app.listen(port, () => {
   console.log('Listening on port:', port);
