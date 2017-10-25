@@ -76,15 +76,13 @@ app.post('/write/createStory', (req,res) => {
 app.get('/genre/:genre', (req,res)=> {
   const genre = req.params.genre
   queries.getStories(genre)
-  // .then(stories => {
-  //   for (var i = 0; i < stories.length; i++) {
-  //     const author = stories[i].user_id;
-  //     queries.getAuthor(author)
       .then(writers => {
         res.render('genre', {
           genre: genre,
           writers: writers
         })
+      })
+    })
 
 app.listen(port, () => {
   console.log('Listening on port:', port);

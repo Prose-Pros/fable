@@ -11,10 +11,6 @@ function getStoryById(id) {
   return db('stories').select().where('stories.id', id).innerJoin('users', 'users.id', 'user_id', )
 }
 
-function getAuthor(authors) {
-  return db('stories').select().where('user_id', authors)
-}
-
 
 function createAccount(user){
   const code = createCode()
@@ -43,7 +39,6 @@ function newStory(story) {
 
 module.exports = {
   login: login,
-  getAuthor: getAuthor,
   getStories: getStories,
   getGenres: getGenres,
   createAccount: createAccount,
