@@ -196,22 +196,39 @@ var obliqueStrategies = [
 'You don\'t have to be ashamed of using your own ideas',
 'Your mistake was a hidden intention' ]
 
-function getPrompt(){
-var prompt = obliqueStrategies[Math.floor(Math.random() * obliqueStrategies.length)]
+// function getPrompt(){
+// var prompt = obliqueStrategies[Math.floor(Math.random() * obliqueStrategies.length)]
+//
+// console.log(prompt)
+// return prompt
+// }
+//
+// var promptForm = document.getElementById('prompt')
+//
+// promptForm.addEventListener('submit', function(event){
+//   event.preventDefault()
+//   console.log(event)
+//
+//   var promptdiv = document.getElementsByClassName('promptDiv')[0]
+//   var prompt = getPrompt()
+//
+//   promptdiv.append(prompt)
+//
+// })
 
-console.log(prompt)
-return prompt
-}
 
-var promptForm = document.getElementById('prompt')
+// ---- **** QUOTE ON HOME PAGE **** ----
 
-promptForm.addEventListener('submit', function(event){
-  event.preventDefault()
-  console.log(event)
 
-  var promptdiv = document.getElementsByClassName('promptDiv')[0]
-  var prompt = getPrompt()
+fetch('https://talaikis.com/api/quotes/random/')
+.then(function(res) {
+  return res.json()
+  .then(function(quoteData){
+    console.log(quoteData)
+    var pQuote = document.getElementById('quote')
 
-  promptdiv.append(prompt)
+    pQuote.innerText = quoteData.quote + ' - ' + quoteData.author
+    console.log(pQuote);
 
+  })
 })
