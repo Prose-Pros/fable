@@ -81,15 +81,12 @@ app.get('/write', (req,res) => {
       currentUser: currentUser
     })
   })
-  .catch(err => {
-    res.sendStatus(500)
-  })
 })
 
 app.post('/write/createStory', (req,res) => {
   queries.newStory(req.body)
   .then(function(story){
-    res.json(story)
+    res.redirect('/')
   })
 })
 
@@ -97,20 +94,11 @@ app.post('/write/createStory', (req,res) => {
 app.get('/:genre', (req,res)=> {
   const genre = req.params.genre
   queries.getStories(genre)
-  // .then(stories => {
-  //   for (var i = 0; i < stories.length; i++) {
-  //     const author = stories[i].user_id;
-  //     queries.getAuthor(author)
-      .then(writers => {
-        res.render('genre', {
-          genre: genre,
-          writers: writers
-        })
-      })
-    // }
-  // })
-  .catch(err => {
-    res.sendStatus(500)
+  .then(writers => {
+    res.render('genre', {
+      genre: genre,
+      writers: writers
+    })
   })
 })
 

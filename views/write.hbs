@@ -25,18 +25,18 @@
 
   <form method="post" action="/write/createStory">
     <label>Title</label>
-    <input name="title" type="text">
+      <input name="title" type="text">
     <label>Author</label>
-    <h4>{{currentUser.username}}</h4>
-    <input type='hidden' name='user_id' value='{{currentUser.id}}'>
+      <h4>{{currentUser.username}}</h4>
+        <input name="user_id" value="{{currentUser.id}}" type="hidden">
     <label>Genre</label>
-    <select name='genre_id'>
-      {{#each dataGenres}}
-      <option value='{{id}}'>{{genre}}</option>
-      {{/each}}
-    </select>
+      <select name="genre_id">
+        {{#each dataGenres}}
+        <option value="{{id}}">{{genre}}</option>
+        {{/each}}
+      </select>
     <label>Story</label>
-    <textarea name="story" type="text"></textarea>
+      <textarea name="story" type="text"></textarea>
     <button>Submit Story</button>
   </form>
 

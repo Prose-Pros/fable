@@ -10,12 +10,14 @@ router.post('/:login', (req,res) => {
   })
 })
 
-router.post('/write/createStory', (req, res) => {
-  queries.newStory(req.body)
-  .then(story => {
-    res.send(story)
-  })
-})
+// router.post('/write/createStory', (req, res) => {
+//   queries.newStory(req.body)
+//   .then(story => {
+//     res.send(story)
+//   }).catch(err => {
+//     res.sendStatus(500)
+//   })
+// })
 
 
 
