@@ -8,20 +8,17 @@ exports.seed = function(knex, Promise) {
         {
           username: 'bethjaw',
           email: 'beth@email.com',
-          code: 'abcd1',
-          loggedIn: false
+          code: 'abcd1'
         },
         {
           username: 'davef',
           email: 'dave@email.com',
-          code: 'efgh2',
-          loggedIn: false
+          code: 'efgh2'
         },
         {
           username: 'mikejones',
           email: 'mike@email.com',
-          code: 'ijkl3',
-          loggedIn: false
+          code: 'ijkl3'
         }
       ]);
     });

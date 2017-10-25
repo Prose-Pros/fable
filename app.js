@@ -1,12 +1,13 @@
 const express = require('express');
-const methodOverride = require('method-override')
 const bodyParser = require('body-parser')
 const app = express();
 const port = process.env.PORT || 3000;
 const queries = require('./db/queries')
 const routes = require('./routes/createLogin')
 const prompts = require('./prompts')
+const methodOverride = require('method-override')
 
+let loggedIn = false;
 let currentUser = "";
 
 
@@ -17,21 +18,21 @@ app.use(bodyParser.json())
 app.use(methodOverride('_method'))
 
 
+
 app.get('/', (req,res) => {
   queries.getGenres()
   .then(dataGenres => {
-    // console.log(currentUser.loggedIn);
-    if (currentUser.loggedIn === false) {
+    if (loggedIn === false) {
       res.render('index', {
         title: 'Fable',
         dataGenres: dataGenres,
-        // loggedIn: loggedIn,
+        loggedIn: loggedIn,
       })
     } else {
       res.render('index', {
         title: 'Fable',
         dataGenres: dataGenres,
-        // loggedIn: loggedIn,
+        loggedIn: loggedIn,
         currentUser: currentUser,
       })
     }
@@ -51,14 +52,12 @@ app.post('/:login', (req,res) => {
 })
 
 app.post('/login/user', (req,res)=>{
-  console.log(req.body);
   const username = req.body.username;
   const code = req.body.code;
   queries.login(username)
   .then(userInfo => {
     if(userInfo[0].code == code) {
-      // userInfo[0].loggedIn = true;
-      // console.log(userInfo[0].loggedIn);
+      loggedIn = true;
       currentUser = userInfo[0]
       res.redirect('/')
     } else {
@@ -86,17 +85,9 @@ app.get('/:genre', (req,res)=> {
           genre: genre,
           writers: writers
         })
+
       })
     }
-  })
-})
-
-app.put('/logout', (req,res) => {
-  queries.login(currentUser.username)
-  .then(user => {
-    user.loggedIn = false
-
-    res.redirect('/')
   })
 })
 
