@@ -20,18 +20,12 @@ app.use(bodyParser.json())
 app.get('/', (req,res) => {
   queries.getGenres()
   .then(dataGenres => {
-    if (user === false) {
-      res.render('index', {
-        title: 'Fable',
-        dataGenres: dataGenres
-      })
-    } else {
-      res.render('index', {
-        title: 'Fable',
-        dataGenres: dataGenres,
-        currentUser: currentUser
-      })
-    }
+    res.render('index', {
+      title: 'Fable',
+      dataGenres: dataGenres,
+      currentUser: currentUser,
+      user: user
+    })
   })
 })
 
@@ -67,6 +61,11 @@ app.post('/login/user', (req,res)=>{
 
 app.get('/login', (req,res)=>{
   res.render('login')
+})
+
+app.post('/logout', (req,res)=>{
+  user = false;
+  res.redirect('/')
 })
 
 app.get('/:genre', (req,res)=> {
