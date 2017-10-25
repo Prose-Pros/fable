@@ -32,10 +32,10 @@ function login(username) {
   return db('users').select().where('username', username)
 }
 
+
 function newStory(story) {
   return db('stories').insert(story).returning('*')
 }
-
 
 module.exports = {
   login: login,

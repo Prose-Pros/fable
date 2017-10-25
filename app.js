@@ -5,6 +5,7 @@ const port = process.env.PORT || 3000;
 const queries = require('./db/queries')
 const routes = require('./routes/createLogin')
 const prompts = require('./prompts')
+const methodOverride = require('method-override')
 
 let loggedIn = false;
 let currentUser = "";
@@ -13,6 +14,7 @@ app.set('view engine', 'hbs');
 app.use(express.static('public'))
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
+app.use(methodOverride('_method'))
 
 
 
