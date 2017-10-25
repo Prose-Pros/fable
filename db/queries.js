@@ -8,7 +8,7 @@ function getStories(genre) {
 }
 
 function getStoryById(id) {
-  return db('stories').select().where('stories.id', id).innerJoin('users', 'users.id', 'user_id', )
+  return db('stories').select().where('stories.id', id).innerJoin('users', 'users.id', 'user_id')
 }
 
 
