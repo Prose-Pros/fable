@@ -23,31 +23,21 @@
 
 <div class='newStory'>
 
-    <form id='storyForm'>
-      <lable>Title</label>
-        <input class='storyInput' type='text' name='title' value=''>
-      <label>Author</label>
-      <!-- possible to autofill user's username? -->
-        <input class='storyInput' type='text' name='user' value=''>
-      <label>Genre</label>
-          <select>
-            <option value="fantasy">Fantasy</option>
-            <option value="horro">Horror</option>
-            <option value="mystery">Mystery</option>
-            <option value="satire">Satire</option>
-            <option value="sci-fi">Sci-Fi</option>
-            <option value="romance">Romance</option>
-            <option value="nonfiction">Nonfiction</option>
-            <option value="miscellaneous">Miscellaneous</option>
-          </select></br>
-      <label class='storyInput'>Story</label>
-        <textarea form='newStory' name='story' rows="20" cols="80" value=''></textarea>
-        <button type='submit'>Post</button>
-    </form>
+  <form method="post" action="/write/createStory">
+    <label>Title</label>
+    <input name="title" type="text">
+    <label>Author</label>
+    <input name="user_id" type="text">
+    <label>Genre</label>
+    <input name="genre_id" type="text">
+    <label>Story</label>
+    <input name="story" type="text">
+    <button>Submit Story</button>
+  </form>
 
-  </div>
+</div>
 
-<script src='index.js'></script>
- <!-- <script src='app.js'></script> -->
+<!-- <script src='index.js'></script> -->
+ <script src='app.js'></script>
   </body>
 </html>

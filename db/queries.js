@@ -32,7 +32,9 @@ function login(username) {
   return db('users').select().where('username', username)
 }
 
-
+function newStory(story) {
+  return db('stories').insert(story).returning('*')
+}
 
 
 module.exports = {
@@ -41,5 +43,6 @@ module.exports = {
   getStories: getStories,
   getGenres: getGenres,
   createAccount: createAccount,
-  createCode: createCode
+  createCode: createCode,
+  newStory: newStory
 }

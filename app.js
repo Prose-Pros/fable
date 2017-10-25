@@ -6,7 +6,7 @@ const queries = require('./db/queries')
 const routes = require('./routes/createLogin')
 const prompts = require('./prompts')
 
-let user = false;
+let loggedIn = false;
 let currentUser = "";
 
 
@@ -20,20 +20,28 @@ app.use(bodyParser.json())
 app.get('/', (req,res) => {
   queries.getGenres()
   .then(dataGenres => {
-    res.render('index', {
-      title: 'Fable',
-      dataGenres: dataGenres,
-      currentUser: currentUser,
-      user: user
-    })
+    if (loggedIn === false) {
+      res.render('index', {
+        title: 'Fable',
+        dataGenres: dataGenres,
+        loggedIn: loggedIn,
+      })
+    } else {
+      res.render('index', {
+        title: 'Fable',
+        dataGenres: dataGenres,
+        loggedIn: loggedIn,
+        currentUser: currentUser,
+      })
+    }
   })
 })
 
 app.post('/:login', (req,res) => {
   queries.createAccount(req.body)
-  .then(function(user){
+  .then(function(code){
     res.render('login', {
-      test: user
+      code: code
     })
   })
   .catch(function(err){
@@ -41,13 +49,14 @@ app.post('/:login', (req,res) => {
   })
 })
 
+
 app.post('/login/user', (req,res)=>{
   const username = req.body.username;
   const code = req.body.code;
   queries.login(username)
   .then(userInfo => {
     if(userInfo[0].code == code) {
-      user = true;
+      loggedIn = true;
       currentUser = userInfo[0]
       res.redirect('/')
     } else {
@@ -59,14 +68,22 @@ app.post('/login/user', (req,res)=>{
   })
 })
 
+
 app.get('/login', (req,res)=>{
   res.render('login')
 })
 
-app.post('/logout', (req,res)=>{
-  user = false;
-  res.redirect('/')
+app.get('/write', (req,res) => {
+  res.render('write')
 })
+
+app.post('/write/createStory', (req,res) => {
+  queries.newStory(req.body)
+  .then(function(story){
+    res.json(story)
+  })
+})
+
 
 app.get('/:genre', (req,res)=> {
   const genre = req.params.genre
@@ -85,6 +102,9 @@ app.get('/:genre', (req,res)=> {
     }
   })
 })
+
+
+
 
 app.listen(port, () => {
   console.log('Listening on port:', port);
