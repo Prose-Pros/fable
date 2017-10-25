@@ -74,7 +74,16 @@ app.get('/login', (req,res)=>{
 })
 
 app.get('/write', (req,res) => {
-  res.render('write')
+  queries.getGenres()
+  .then(dataGenres => {
+    res.render('write', {
+      dataGenres: dataGenres,
+      currentUser: currentUser
+    })
+  })
+  .catch(err => {
+    res.sendStatus(500)
+  })
 })
 
 app.post('/write/createStory', (req,res) => {
@@ -88,18 +97,20 @@ app.post('/write/createStory', (req,res) => {
 app.get('/:genre', (req,res)=> {
   const genre = req.params.genre
   queries.getStories(genre)
-  .then(stories => {
-    for (var i = 0; i < stories.length; i++) {
-      const author = stories[i].user_id;
-      queries.getAuthor(author)
+  // .then(stories => {
+  //   for (var i = 0; i < stories.length; i++) {
+  //     const author = stories[i].user_id;
+  //     queries.getAuthor(author)
       .then(writers => {
         res.render('genre', {
           genre: genre,
           writers: writers
         })
-
       })
-    }
+    // }
+  // })
+  .catch(err => {
+    res.sendStatus(500)
   })
 })
 

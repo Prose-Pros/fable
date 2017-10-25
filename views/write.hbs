@@ -27,11 +27,16 @@
     <label>Title</label>
     <input name="title" type="text">
     <label>Author</label>
-    <input name="user_id" type="text">
+    <h4>{{currentUser.username}}</h4>
+    <input type='hidden' name='user_id' value='{{currentUser.id}}'>
     <label>Genre</label>
-    <input name="genre_id" type="text">
+    <select name='genre_id'>
+      {{#each dataGenres}}
+      <option value='{{id}}'>{{genre}}</option>
+      {{/each}}
+    </select>
     <label>Story</label>
-    <input name="story" type="text">
+    <textarea name="story" type="text"></textarea>
     <button>Submit Story</button>
   </form>
 
