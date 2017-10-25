@@ -84,15 +84,29 @@ app.get('/write', (req,res) => {
   })
 })
 
-app.post('/write/createStory', (req,res) => {
-  queries.newStory(req.body)
-  .then(function(story){
-    res.redirect('/')
+app.get('/story/:id', (req,res) => {
+  const storyId = req.params.id;
+  queries.getStoryById(storyId)
+  .then(theStory => {
+    // res.send(theStory)
+    res.render('story', {
+      title: theStory[0].title,
+      theStory: theStory[0]
+    })
+
   })
 })
 
+app.post('/write/createStory', (req,res) => {
+  queries.newStory(req.body)
+  .then(function(story){
+    res.redirect('/story/' + story[0].id)
+    })
+  })
 
-app.get('/:genre', (req,res)=> {
+
+
+app.get('/genre/:genre', (req,res)=> {
   const genre = req.params.genre
   queries.getStories(genre)
   .then(writers => {
@@ -102,7 +116,6 @@ app.get('/:genre', (req,res)=> {
     })
   })
 })
-
 
 
 
