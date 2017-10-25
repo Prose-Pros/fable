@@ -4,7 +4,7 @@ function getGenres() {
   return db('genres').select()
 }
 function getStories(genre) {
-  return db('genres').select().where('genre', genre).innerJoin('stories', 'genres.id', 'genre_id')
+  return db('genres').select().where('genre', genre).innerJoin('stories', 'genres.id', 'genre_id').innerJoin('users', 'users.id', 'user_id')
 }
 
 function getAuthor(authors) {
