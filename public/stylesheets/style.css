@@ -112,6 +112,11 @@ textarea {
   height: 280px;
 }
 
+.commentArea {
+  width: 600px;
+  height: 50px;
+}
+
 .storyInput {
   border-radius: 2px;
   height: 20px;
@@ -154,10 +159,6 @@ button:hover {
   flex-direction: column;
   align-items: center;
   padding-bottom: 30px;
-}
-
-.myStoryArea {
-
 }
 
 .storyLink {

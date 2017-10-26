@@ -76,15 +76,21 @@ app.get('/write', (req,res) => {
   })
 })
 
-app.get('/story/:id', (req,res) => {
-  const storyId = req.params.id;
+app.get('/story/:title', (req,res) => {
+  const storyId = req.params.title;
   queries.getStoryById(storyId)
   .then(theStory => {
-    // res.send(theStory)
-    res.render('story', {
-      title: theStory[0].title,
-      theStory: theStory[0],
-      currentUser: currentUser
+    const title = theStory[0].title
+    queries.getComment(title)
+    .then(commentData => {
+      // res.send(commentData)
+      res.render('story', {
+        title: theStory[0].title,
+        theStory: theStory[0],
+        currentUser: currentUser,
+        commentData: commentData
+
+      })
     })
   })
 })
@@ -92,7 +98,7 @@ app.get('/story/:id', (req,res) => {
 app.post('/write/createStory', (req,res) => {
   queries.newStory(req.body)
   .then(function(story){
-    res.redirect('/story/' + story[0].id)
+    res.redirect('/story/' + story[0].title)
     })
 })
 
@@ -104,7 +110,8 @@ app.get('/genre/:genre', (req,res)=> {
       .then(writers => {
         res.render('genre', {
           genre: genre,
-          writers: writers
+          writers: writers,
+          currentUser: currentUser
         })
       })
 })
@@ -125,11 +132,18 @@ app.get('/userProfile/:userId', (req,res) => {
   const userId = req.params.userId
   queries.getUserInfo(userId)
   .then(userData => {
+    // res.send(userData)
     res.render('profile', {
       userData: userData,
       currentUser: currentUser
     })
   })
+})
+
+app.post('/story/:title/comment', (req,res) => {
+  const title = req.params.title;
+  const thecomment = req.body.comment;
+  res.send(thecomment)
 })
 
 app.listen(port, () => {
