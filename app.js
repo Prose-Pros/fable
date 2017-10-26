@@ -18,23 +18,16 @@ app.use(bodyParser.json())
 
 app.get('/', (req,res) => {
   queries.getGenres()
-  .then(dataGenres => {
-    if(loggedIn === false){
-      res.render('index', {
-        title: 'Fable',
-        dataGenres: dataGenres,
-        currentUser: currentUser
-      })
-    } else {
+    .then(dataGenres => {
       res.render('index', {
         title: 'Fable',
         dataGenres: dataGenres,
         loggedIn: loggedIn,
         currentUser: currentUser
       })
-    }
-  })
+    })
 })
+
 
 app.post('/:login', (req,res) => {
   queries.createAccount(req.body)
@@ -78,7 +71,6 @@ app.get('/write', (req,res) => {
       dataGenres: dataGenres,
       currentUser: currentUser
     })
-
   })
 })
 
@@ -91,7 +83,6 @@ app.get('/story/:id', (req,res) => {
       title: theStory[0].title,
       theStory: theStory[0]
     })
-
   })
 })
 
@@ -100,7 +91,7 @@ app.post('/write/createStory', (req,res) => {
   .then(function(story){
     res.redirect('/story/' + story[0].id)
     })
-  })
+})
 
 
 
@@ -113,7 +104,19 @@ app.get('/genre/:genre', (req,res)=> {
           writers: writers
         })
       })
+})
+
+app.get('/:logout', (req, res) => {
+  loggedIn = false
+  queries.getGenres()
+    .then(dataGenres => {
+      res.render('index', {
+        title: 'Fable',
+        dataGenres: dataGenres,
+        loggedIn: loggedIn
+      })
     })
+})
 
 app.listen(port, () => {
   console.log('Listening on port:', port);
