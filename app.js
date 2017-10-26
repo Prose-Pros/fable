@@ -4,7 +4,8 @@ const app = express();
 const port = process.env.PORT || 3000;
 const queries = require('./db/queries')
 const routes = require('./routes/createLogin')
-const prompts = require('./prompts')
+
+const methodOverride = require('method-override')
 
 let loggedIn = false;
 let currentUser = "";
@@ -13,6 +14,7 @@ app.set('view engine', 'hbs');
 app.use(express.static('public'))
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
+app.use(methodOverride('_method'))
 
 
 
@@ -81,7 +83,8 @@ app.get('/story/:id', (req,res) => {
     // res.send(theStory)
     res.render('story', {
       title: theStory[0].title,
-      theStory: theStory[0]
+      theStory: theStory[0],
+      currentUser: currentUser
     })
   })
 })
@@ -116,6 +119,17 @@ app.get('/:logout', (req, res) => {
         loggedIn: loggedIn
       })
     })
+})
+
+app.get('/userProfile/:userId', (req,res) => {
+  const userId = req.params.userId
+  queries.getUserInfo(userId)
+  .then(userData => {
+    res.render('profile', {
+      userData: userData,
+      currentUser: currentUser
+    })
+  })
 })
 
 app.listen(port, () => {

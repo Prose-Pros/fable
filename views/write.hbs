@@ -16,14 +16,12 @@
         <form id='prompt'>
           <button type='submit'>Prompt Me</button>
         </form>
-        <div class='promptDiv'>
-          <p>{{prompt}}</p>
-      </div>
+          <p id='promptDiv'>{{prompt}}</p>
     </div>
 
 <div class='newStory'>
 
-  <form method="post" action="/write/createStory">
+  <form id='storyForm' method="post" action="/write/createStory">
     <label>Title</label>
     <input name="title" type="text">
     <label>Author</label>
@@ -36,13 +34,13 @@
       {{/each}}
     </select>
     <label>Story</label>
-    <input name="story" type="text">
+    <textarea name="story" type="text"></textarea>
     <button>Submit Story</button>
   </form>
 
 </div>
 
-<!-- <script src='index.js'></script> -->
- <script src='app.js'></script>
+<script src='/prompts.js'></script>
+ <!-- <script src='app.js'></script> -->
   </body>
 </html>
