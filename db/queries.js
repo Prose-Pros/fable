@@ -8,7 +8,7 @@ function getStories(genre) {
 }
 
 function getStoryById(id) {
-  return db('stories').select().where('stories.id', id).innerJoin('users', 'users.id', 'user_id')
+  return db('stories').select().where('title', id).innerJoin('users', 'users.id', 'user_id')
 }
 
 
@@ -37,9 +37,24 @@ function newStory(story) {
   return db('stories').insert(story).returning('*')
 }
 
+
 function getUserInfo(id) {
   return db('users').select().where('users.id', id).innerJoin('stories', 'user_id', 'users.id').innerJoin('genres', "genres.id", 'genre_id')
 }
+
+function getComment(title) {
+  return db('stories').select().where('title', title).innerJoin('comments', 'stories.id', 'story_id')
+
+}
+
+function getStoryByTitle(title) {
+    return db('stories').select().where('title', title)
+}
+
+function postComment(theComment) {
+  return db('comments').insert(theComment).returning('*')
+}
+
 
 module.exports = {
   login: login,
@@ -49,5 +64,8 @@ module.exports = {
   createCode: createCode,
   newStory: newStory,
   getStoryById: getStoryById,
-  getUserInfo: getUserInfo
+  getUserInfo: getUserInfo,
+  getComment: getComment,
+  postComment: postComment,
+  getStoryByTitle: getStoryByTitle
 }

@@ -65,6 +65,8 @@ footer p {
   font-style: italic;
 }
 
+/* ******* FORMS ******* */
+
 #createForm, #loginForm {
   display: flex;
   flex-direction: column;
@@ -112,6 +114,11 @@ textarea {
   height: 280px;
 }
 
+.commentArea {
+  width: 600px;
+  height: 50px;
+}
+
 .storyInput {
   border-radius: 2px;
   height: 20px;
@@ -123,7 +130,6 @@ textarea {
   flex-direction: column;
   justify-content: center;
   width: 600px;
-
 }
 
 .newStory {
@@ -133,6 +139,20 @@ textarea {
   margin-left: 10px;
   margin-top: 20px;
 }
+
+
+.comment {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.commentForm {
+  display: flex;
+  flex-direction: column;
+}
+
 
 .storyHead {
   display: flex;
@@ -149,15 +169,12 @@ button:hover {
   background-color: #5B735D;
 }
 
+
 .storyInfo {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding-bottom: 30px;
-}
-
-.myStoryArea {
-
 }
 
 .storyLink {
@@ -168,4 +185,28 @@ button:hover {
 
 .storyLink:hover {
   background-color: #476C5B;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background: #53765e;
+  color: #c7c7c7;
+  font-family: 'Raleway', sans-serif;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.dropdown:hover .dropdown-content{
+  display: block;
+}
+
+.dropdownPosFix {
+  margin-top: 20px;
 }
