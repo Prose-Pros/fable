@@ -9,6 +9,7 @@
   <body>
     <aside class="create-login">
       {{#if loggedIn}}
+      <a href="/userProfile/{{currentUser.id}}"><button type="button" name="button">My Profile</button></a>
       <a href="/"><button type="button" name="button">Logout</button></a>
       <span>{{currentUser.username}}</span>
       {{else}}

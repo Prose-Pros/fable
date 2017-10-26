@@ -4,7 +4,6 @@ const app = express();
 const port = process.env.PORT || 3000;
 const queries = require('./db/queries')
 const routes = require('./routes/createLogin')
-const prompts = require('./prompts')
 
 let loggedIn = false;
 let currentUser = "";
@@ -89,7 +88,8 @@ app.get('/story/:id', (req,res) => {
     // res.send(theStory)
     res.render('story', {
       title: theStory[0].title,
-      theStory: theStory[0]
+      theStory: theStory[0],
+      currentUser: currentUser
     })
 
   })
@@ -114,6 +114,17 @@ app.get('/genre/:genre', (req,res)=> {
         })
       })
     })
+
+app.get('/userProfile/:userId', (req,res) => {
+  const userId = req.params.userId
+  queries.getUserInfo(userId)
+  .then(userData => {
+    res.render('profile', {
+      userData: userData,
+      currentUser: currentUser
+    })
+  })
+})
 
 app.listen(port, () => {
   console.log('Listening on port:', port);
