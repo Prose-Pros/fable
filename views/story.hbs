@@ -31,6 +31,7 @@
     <h5>Add a Comment</h5>
     <form class="" action="/story/{{theStory.title}}/comment" method="post">
       <textarea class="commentArea" name="comment"></textarea>
+      <input type="hidden" value="{{storyData.id}}" name="story_id">
       <button type="submit">submit</button>
     </form>
     <div class="storyInfo">

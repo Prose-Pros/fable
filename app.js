@@ -80,17 +80,23 @@ app.get('/story/:title', (req,res) => {
   const storyId = req.params.title;
   queries.getStoryById(storyId)
   .then(theStory => {
-    const title = theStory[0].title
+    const title = theStory[0]['title']
     queries.getComment(title)
     .then(commentData => {
-      // res.send(commentData)
-      res.render('story', {
-        title: theStory[0].title,
-        theStory: theStory[0],
-        currentUser: currentUser,
-        commentData: commentData
+      queries.getStoryByTitle(storyId)
+      .then(storyData=>{
+        // res.send(storyData)
+        res.render('story', {
+          title: theStory[0].title,
+          theStory: theStory[0],
+          currentUser: currentUser,
+          commentData: commentData,
+          storyData: storyData[0]
+
+        })
 
       })
+      // res.send(commentData)
     })
   })
 })
@@ -142,8 +148,12 @@ app.get('/userProfile/:userId', (req,res) => {
 
 app.post('/story/:title/comment', (req,res) => {
   const title = req.params.title;
-  const thecomment = req.body.comment;
-  res.send(thecomment)
+  const theComment = req.body;
+  // res.send(theComment)
+  queries.postComment(theComment).then(commentData=>{
+    res.redirect('/')
+
+  })
 })
 
 app.listen(port, () => {

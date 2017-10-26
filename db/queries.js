@@ -46,6 +46,14 @@ function getComment(title) {
 
 }
 
+function getStoryByTitle(title) {
+    return db('stories').select().where('title', title)
+}
+
+function postComment(theComment) {
+  return db('comments').insert(theComment).returning('*')
+}
+
 
 module.exports = {
   login: login,
@@ -56,5 +64,7 @@ module.exports = {
   newStory: newStory,
   getStoryById: getStoryById,
   getUserInfo: getUserInfo,
-  getComment: getComment
+  getComment: getComment,
+  postComment: postComment,
+  getStoryByTitle: getStoryByTitle
 }
