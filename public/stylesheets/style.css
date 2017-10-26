@@ -61,6 +61,8 @@ footer p {
   font-style: italic;
 }
 
+/* ******* FORMS ******* */
+
 #createForm, #loginForm {
   display: flex;
   flex-direction: column;
@@ -118,9 +120,7 @@ textarea {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 500px;
-  align-items: center;
-  /*height: 100vh;*/
+  width: 600px;
 }
 
 .newStory {
@@ -129,6 +129,22 @@ textarea {
   justify-content: center;
   margin-left: 10px;
   margin-top: 20px;
+}
+
+
+.comment {
+  display: flex;
+  justify-content: center;
+}
+
+.commentForm {
+  display: flex;
+  flex-direction: column;
+}
+
+.textComment {
+  width: 600px;
+  height: 200px;
 }
 
 .storyHead {
@@ -144,4 +160,17 @@ a {
 
 button:hover {
   background-color: #5B735D;
+}
+
+.profile-home button {
+  float: right;
+  flex-direction: row;
+  margin-right: 20px;
+}
+
+.storyInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 30px;
 }

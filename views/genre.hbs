@@ -3,17 +3,22 @@
   <head>
     <meta charset="utf-8">
     <title>Fable: {{genre}}</title>
-    <link rel="stylesheet" href="./stylesheets/style.css">
+    <link rel="stylesheet" href="../stylesheets/style.css">
   </head>
   <body>
+
+    <aside class="profile-home">
+    <a href='/'><button type='button'>Home</button></a>
+  </aside>
+
     <a href="/">
-    <img class="logo-text" src="images/fableText.png" alt=""></a>
+    <img class="logo-text" src="/images/fableText.png" alt=""></a>
     <h2>{{genre}}</h2>
     <div class="genreStories">
       <h4>Stories</h4>
-      {{#each writers}}
-        <p>Title: {{title}}, Author: {{username}}</p>
-      {{/each}}
+          {{#each writers}}
+            <p>Title: {{title}}, Author: {{username}}</p>
+          {{/each}}
     </div>
     <!-- see all stories under one genre -->
     <div>
@@ -21,6 +26,6 @@
         <button>Write a Story</button>
       </a>
     </div>
-
+<script src='app.js'></script>
   </body>
 </html>

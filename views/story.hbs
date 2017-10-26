@@ -4,13 +4,41 @@
     <meta charset="utf-8">
     <title>{{title}}</title>
     <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
-    <link rel="stylesheet" href="./stylesheets/style.css">
+    <link rel="stylesheet" href="../stylesheets/style.css">
   </head>
+
   <body>
+    <aside class="profile-home">
+        <a href='/userProfile/{{currentUser.id}}'><button>My Proile</button></a>
+        <a href='/'><button type='button'>Home</button></a>
+    </aside>
+
     <a href="/">
-    <img class="logo-text" src="images/fableText.png" alt=""></a>
+    <img class="logo-text" src="/images/fableText.png" alt=""></a>
 
-    <!-- you wrote a story and your reading it -->
 
+    <div class='storyInfo'>
+      <h1>{{theStory.title}}</h1>
+      <h5>by {{theStory.username}}</h5>
+      <p>{{theStory.story}}</p>
+    </div>
+
+
+    <div class="comment">
+
+      <form class='commentForm' method='post' action='/story/comment'>
+
+        <input name="user_id" value="{{currentUser.id}}" type="hidden">
+
+        <input name='story_id' value='{{currentStory.id}}' type='hidden'>
+
+        <label>Write a Comment</label>
+          <textarea class='textComment' type='text' name='comment'></textarea>
+        <button>Add Comment</button>
+      </form>
+
+    </div>
+
+    <script type="text/javascript" src="./app.js"></script>
   </body>
 </html>

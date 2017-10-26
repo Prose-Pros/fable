@@ -9,6 +9,7 @@
   <body>
     <aside class="create-login">
       {{#if loggedIn}}
+      <a href='/userProfile/{{currentUser.id}}'><button type='button' name='button'>My Profile</button></a>
       <a href="/"><button type="button" name="button">Logout</button></a>
       <span>{{currentUser.username}}</span>
       {{else}}
@@ -25,16 +26,17 @@
       <section class="index-genres">
         <h4>Genres</h4>
         {{#each dataGenres}}
-        <a href="/{{genre}}">
+        <a href="/genre/{{genre}}">
           <button>{{genre}}</button>
         </a>
         {{/each}}
 
       </section>
       <footer>
-        <p id='quote'>"Aliquam scelerisque sagittis sapien ut tincidunt. Cras et sem vel velit aliquam accumsan." - Unknown</p>
+        <p id='quote'><span></span></p>
       </footer>
     </main>
     <script type="text/javascript" src="./app.js"></script>
+    <script type="text/javascript" src="index.js"></script>
   </body>
 </html>

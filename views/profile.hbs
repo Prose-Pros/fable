@@ -3,35 +3,34 @@
   <head>
     <meta charset="utf-8">
     <title>{{title}}</title>
-    <link rel='stylesheet' href='./stylesheets/style.css'>
+    <link rel='stylesheet' href='../stylesheets/style.css'>
   </head>
   <body>
+    <aside class="profile-home">
+    <a href='/'><button type='button'>Home</button></a>
+  </aside>
+
     <a href="/">
     <img class="logo-text" src="images/fableText.png" alt=""></a>
 
-    <h2>UserName</h2>
-    <h4>My Stories</h4>
+<div class='storyInfo'>
+    <h2>{{currentUser.username}}</h2>
 
-    <table>
-      <tr>
-        <th>Title</th>
-        <th>Description</th>
-        <th>Date</th>
-      </tr>
-      <tr>
-        <td>The Black Cat</td>
-        <td>It was a foggy All Hollows Eve...</td>
-        <td>Horror</td>
-      </tr>
-      <tr>
-        <td>The Princess and the Frog</td>
-        <td>Once upon a time...</td>
-        <td>Fantasy</td>
-      </tr>
-    </table>
+    <div class='myStoryArea'>
+    <h4>My Stories</h4>
+      {{#each userData}}
+      <a href=/story/{{id}}>
+        <div class='storyLink'>
+          <h4>Title: {{title}} <span>Genre: {{genre}}</span></h4>
+        </div>
+      </a>
+      {{/each}}
+    </div>
+  </div>
+
 
 <div>
-  <a href='write.hbs'>
+  <a href='/write'>
     <button class='createBtn'>Write a New Story</button>
   </a>
 </div>
