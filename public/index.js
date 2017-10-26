@@ -1,5 +1,3 @@
-
-
 // ---- **** QUOTE ON HOME PAGE **** ----
 
 

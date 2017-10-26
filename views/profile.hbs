@@ -6,12 +6,21 @@
     <link rel='stylesheet' href='../stylesheets/style.css'>
   </head>
   <body>
-    <aside class="profileHome create-login">
+
+    <div class='dropdown create-login'>
+    <aside class="profileHome dropdownPosFix">
+      <button class='dropMenu'>Menu</button>
+        <div class='dropdown-content'>
+
       <a href="/write"><button type="button" name="button">Write a Story</button></a>
       <a href="/userProfile/{{currentUser.id}}"><button type="button" name="button">My Profile</button></a>
       <a href="/"><button type="button" name="button">Logout</button></a>
       <span>{{currentUser.username}}</span>
+
+    </div>
     </aside>
+  </div>
+
     <a href="/">
     <img class="logo-text" src="/images/fableText.png" alt=""></a>
     <div class="storyInfo">
@@ -19,7 +28,7 @@
     <div class="myStoryArea">
     <h4>My Stories</h4>
     {{#each userData}}
-    <a href="/story/{{id}}">
+    <a href="/story/{{title}}">
     <div class="storyLink">
         <h4>Title: {{title}}, <span>Genre: {{genre}}</span></h4>
     </div>

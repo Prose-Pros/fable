@@ -6,6 +6,21 @@
     <link rel='stylesheet' href='./stylesheets/style.css'>
   </head>
   <body>
+
+    <!-- <aside class="create-login profileHome">
+      {{#if loggedIn}}
+      <a href="/write"><button type="button" name="button">Write a Story</button></a>
+      <a href="/userProfile/{{currentUser.id}}"><button type="button" name="button">My Profile</button></a>
+      <form action="/:logout" method="get">
+        <a href=""><button type="button" name="button">Logout</button></a>
+      </form>
+      <span>{{currentUser.username}}</span>
+      {{else}}
+      <a href="/login"><button type="button" name="button">Create Account</button></a>
+      <a href="/login"><button type="button" name="button">Login</button></a>
+      {{/if}}
+    </aside> -->
+
     <a href="/">
     <img class="logo-text" src="images/fableText.png" alt=""></a>
 
@@ -23,24 +38,25 @@
 
   <form id='storyForm' method="post" action="/write/createStory">
     <label>Title</label>
-    <input name="title" type="text">
+      <input name="title" type="text">
     <label>Author</label>
-    <h4>{{currentUser.username}}</h4>
-    <input name="user_id" value="{{currentUser.id}}" type="hidden">
+      <h4>{{currentUser.username}}</h4>
+        <input name="user_id" value="{{currentUser.id}}" type="hidden">
     <label>Genre</label>
-    <select name="genre_id">
-      {{#each dataGenres}}
-      <option value="{{id}}">{{genre}}</option>
-      {{/each}}
-    </select>
+      <select name="genre_id">
+        {{#each dataGenres}}
+        <option value="{{id}}">{{genre}}</option>
+        {{/each}}
+      </select>
     <label>Story</label>
-    <textarea name="story" type="text"></textarea>
+      <textarea name="story" type="text"></textarea>
+
     <button>Submit Story</button>
   </form>
 
 </div>
 
 <script src='/prompts.js'></script>
- <!-- <script src='app.js'></script> -->
+
   </body>
 </html>

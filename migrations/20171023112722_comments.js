@@ -4,7 +4,6 @@ exports.up = function(knex, Promise) {
     knex.schema.createTable('comments', (table)=>{
       table.increments()
       table.text('comment')
-      table.integer('user_id')
       table.integer('story_id')
     })
   ])
