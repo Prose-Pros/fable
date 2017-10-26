@@ -82,7 +82,6 @@ app.get('/story/:title', (req,res) => {
     const title = theStory[0]['title']
     queries.getComment(title)
     .then(commentData => {
-<<<<<<< HEAD
       queries.getStoryByTitle(storyId)
       .then(storyData=>{
         // res.send(storyData)
@@ -95,14 +94,6 @@ app.get('/story/:title', (req,res) => {
 
         })
 
-=======
-      // res.send(commentData)
-      res.render('story', {
-        title: theStory[0].title,
-        theStory: theStory[0],
-        currentUser: currentUser,
-        commentData: commentData
->>>>>>> d89b4203fdd89e6a08e257fde9f39c780549fa2c
       })
       // res.send(commentData)
     })
