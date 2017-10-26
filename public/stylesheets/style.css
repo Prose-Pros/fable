@@ -18,6 +18,15 @@ main {
   margin-top: -20px;
 }
 
+.profileHome button{
+  margin-top: 20px;
+}
+
+.profile-home button {
+  margin-right: 20px;
+}
+
+
 .create-login button {
   background: #53765e;
   color: #c7c7c7;
@@ -131,7 +140,7 @@ textarea {
   margin-top: 20px;
 }
 
-
+/*
 .comment {
   display: flex;
   justify-content: center;
@@ -145,7 +154,7 @@ textarea {
 .textComment {
   width: 600px;
   height: 200px;
-}
+}*/
 
 .storyHead {
   display: flex;
@@ -162,15 +171,24 @@ button:hover {
   background-color: #5B735D;
 }
 
-.profile-home button {
-  float: right;
-  flex-direction: row;
-  margin-right: 20px;
-}
 
 .storyInfo {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding-bottom: 30px;
+}
+
+.myStoryArea {
+
+}
+
+.storyLink {
+  background-color: #252829;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.storyLink:hover {
+  background-color: #476C5B;
 }

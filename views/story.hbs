@@ -8,7 +8,8 @@
   </head>
 
   <body>
-    <aside class="profile-home">
+
+    <aside class="create-login profileHome">
         <a href='/userProfile/{{currentUser.id}}'><button>My Proile</button></a>
         <a href='/'><button type='button'>Home</button></a>
     </aside>
@@ -16,15 +17,14 @@
     <a href="/">
     <img class="logo-text" src="/images/fableText.png" alt=""></a>
 
-
-    <div class='storyInfo'>
+    <div class="storyInfo">
       <h1>{{theStory.title}}</h1>
       <h5>by {{theStory.username}}</h5>
       <p>{{theStory.story}}</p>
     </div>
 
 
-    <div class="comment">
+    <!-- <div class="comment">
 
       <form class='commentForm' method='post' action='/story/comment'>
 
@@ -37,7 +37,8 @@
         <button>Add Comment</button>
       </form>
 
-    </div>
+    </div> -->
+
 
     <script type="text/javascript" src="./app.js"></script>
   </body>
