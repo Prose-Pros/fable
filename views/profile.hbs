@@ -3,36 +3,29 @@
   <head>
     <meta charset="utf-8">
     <title>{{title}}</title>
-    <link rel='stylesheet' href='./stylesheets/style.css'>
+    <link rel='stylesheet' href='../stylesheets/style.css'>
   </head>
   <body>
+    <aside class="profileHome create-login">
+      <a href="/write"><button type="button" name="button">Write a Story</button></a>
+      <a href="/userProfile/{{currentUser.id}}"><button type="button" name="button">My Profile</button></a>
+      <a href="/"><button type="button" name="button">Logout</button></a>
+      <span>{{currentUser.username}}</span>
+    </aside>
     <a href="/">
-    <img class="logo-text" src="images/fableText.png" alt=""></a>
-
-    <h2>UserName</h2>
+    <img class="logo-text" src="/images/fableText.png" alt=""></a>
+    <div class="storyInfo">
+    <h2>{{currentUser.username}}</h2>
+    <div class="myStoryArea">
     <h4>My Stories</h4>
-    <table>
-      <tr>
-        <th>Title</th>
-        <th>Description</th>
-        <th>Date</th>
-      </tr>
-      <tr>
-        <td>The Black Cat</td>
-        <td>It was a foggy All Hollows Eve...</td>
-        <td>Horror</td>
-      </tr>
-      <tr>
-        <td>The Princess and the Frog</td>
-        <td>Once upon a time...</td>
-        <td>Fantasy</td>
-      </tr>
-</table>
-
-<div>
-  <a href='write.hbs'>
-    <button class='createBtn'>Write a New Story</button>
-  </a>
+    {{#each userData}}
+    <a href="/story/{{id}}">
+    <div class="storyLink">
+        <h4>Title: {{title}}, <span>Genre: {{genre}}</span></h4>
+    </div>
+  </a> 
+    {{/each}}
+  </div>
 </div>
 
   </body>
