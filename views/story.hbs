@@ -8,11 +8,20 @@
   </head>
 
   <body>
-
+<!--
     <aside class="create-login profileHome">
-        <a href='/userProfile/{{currentUser.id}}'><button>My Proile</button></a>
-        <a href='/'><button type='button'>Home</button></a>
-    </aside>
+      {{#if loggedIn}}
+        <a href="/userProfile/{{currentUser.id}}"><button type="button" name="button">My Profile</button></a>
+        <form action="/:logout" method="get">
+          <a href=""><button type="button" name="button">Logout</button></a>
+        </form>
+        <span>{{currentUser.username}}</span>
+        {{else}}
+        <a href="/login"><button type="button" name="button">Create Account</button></a>
+        <a href="/login"><button type="button" name="button">Login</button></a>
+        {{/if}}
+    </aside> -->
+
 
     <a href="/">
     <img class="logo-text" src="/images/fableText.png" alt=""></a>
@@ -23,23 +32,22 @@
       <p>{{theStory.story}}</p>
     </div>
 
+<div class='comment'>
+    <h5>Add a Comment</h5>
+    <form class="commentForm" action="/story/{{theStory.title}}/comment" method="post">
+      <textarea class="commentArea" name="comment"></textarea>
+      <button type="submit">submit</button>
+    </form>
+</div>
 
-    <!-- <div class="comment">
-
-      <form class='commentForm' method='post' action='/story/comment'>
-
-        <input name="user_id" value="{{currentUser.id}}" type="hidden">
-
-        <input name='story_id' value='{{currentStory.id}}' type='hidden'>
-
-        <label>Write a Comment</label>
-          <textarea class='textComment' type='text' name='comment'></textarea>
-        <button>Add Comment</button>
-      </form>
-
-    </div> -->
-
-
+    <div class="storyInfo">
+      <h5>Comments</h5>
+      {{#each commentData}}
+      <div class="">
+        <h4>{{comment}}</h4>
+        {{/each}}
+      </div>
+    </div>
     <script type="text/javascript" src="./app.js"></script>
   </body>
 </html>

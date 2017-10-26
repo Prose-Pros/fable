@@ -7,24 +7,38 @@
   </head>
   <body>
 
-    <aside class="profileHome create-login">
-    <a href='/'><button type='button'>Home</button></a>
-  </aside>
+
+<!-- <div class='dropdown create-login'>
+    <aside class="dropdownPosFix profileHome">
+      <button class='dropMenu'>Menu</button>
+        <div class='dropdown-content'>
+      {{#if loggedIn}}
+      <a href="/userProfile/{{currentUser.id}}"><button type="button" name="button">My Profile</button></a>
+      <form action="/:logout" method="get">
+        <a href=""><button type="button" name="button">Logout</button></a>
+      </form>
+      <span>{{currentUser.username}}</span>
+      {{else}}
+      <a href="/login"><button type="button" name="button">Create Account</button></a>
+      <a href="/login"><button type="button" name="button">Login</button></a>
+      {{/if}}
+    </div>
+    </aside>
+  </div> -->
+
 
     <a href="/">
     <img class="logo-text" src="/images/fableText.png" alt=""></a>
     <h2>{{genre}}</h2>
     <div class="genreStories">
       <h4>Stories</h4>
-          {{#each writers}}
-            <p>Title: {{title}}, Author: {{username}}</p>
-          {{/each}}
-    </div>
-    <!-- see all stories under one genre -->
-    <div>
-      <a href="/write">
-        <button>Write a Story</button>
+      {{#each writers}}
+      <a href="/story/{{title}}">
+        <div class="storyLink">
+            <h4>Title: {{title}}, <span>Author: {{username}}</span></h4>
+        </div>
       </a>
+      {{/each}}
     </div>
 <script src='app.js'></script>
   </body>

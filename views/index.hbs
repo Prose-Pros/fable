@@ -7,19 +7,27 @@
     <link rel="stylesheet" href="./stylesheets/style.css">
   </head>
   <body>
-    <aside class="create-login profileHome">
-      {{#if loggedIn}}
-      <a href="/userProfile/{{currentUser.id}}"><button type="button" name="button">My Profile</button></a>
-      <form action="/:logout" method="get">
-        <a href=""><button type="button" name="button">Logout</button></a>
-      </form>
 
-      <span>{{currentUser.username}}</span>
-      {{else}}
-      <a href="/login"><button type="button" name="button">Create Account</button></a>
-      <a href="/login"><button type="button" name="button">Login</button></a>
-      {{/if}}
-    </aside>
+    <div class='dropdown create-login'>
+      <aside class="create-login profileHome">
+        <button class='dropMenu'>Menu</button>
+          <div class='dropdown-content'>
+            {{#if loggedIn}}
+            <a href="/write"><button type="button" name="button">Write a Story</button></a>
+            <a href="/userProfile/{{currentUser.id}}"><button type="button" name="button">My Profile</button></a>
+            <form action="/:logout" method="get">
+              <a href=""><button type="button" name="button">Logout</button></a>
+            </form>
+            <span>{{currentUser.username}}</span>
+            {{else}}
+            <a href="/login"><button type="button" name="button">Create Account</button></a>
+            <a href="/login"><button type="button" name="button">Login</button></a>
+            {{/if}}
+          </div>
+      </aside>
+    </div>
+
+
     <main>
       <section class="splash">
         <img class="logo" src="images/fable.png" alt="">
