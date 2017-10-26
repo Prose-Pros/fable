@@ -17,7 +17,6 @@ app.use(bodyParser.json())
 app.use(methodOverride('_method'))
 
 
-
 app.get('/', (req,res) => {
   queries.getGenres()
     .then(dataGenres => {
@@ -61,10 +60,10 @@ app.post('/login/user', (req,res)=>{
   })
 })
 
-
 app.get('/login', (req,res)=>{
   res.render('login')
 })
+
 
 app.get('/write', (req,res) => {
   queries.getGenres()
@@ -83,6 +82,7 @@ app.get('/story/:title', (req,res) => {
     const title = theStory[0]['title']
     queries.getComment(title)
     .then(commentData => {
+<<<<<<< HEAD
       queries.getStoryByTitle(storyId)
       .then(storyData=>{
         // res.send(storyData)
@@ -95,11 +95,20 @@ app.get('/story/:title', (req,res) => {
 
         })
 
+=======
+      // res.send(commentData)
+      res.render('story', {
+        title: theStory[0].title,
+        theStory: theStory[0],
+        currentUser: currentUser,
+        commentData: commentData
+>>>>>>> d89b4203fdd89e6a08e257fde9f39c780549fa2c
       })
       // res.send(commentData)
     })
   })
 })
+
 
 app.post('/write/createStory', (req,res) => {
   queries.newStory(req.body)
@@ -122,6 +131,30 @@ app.get('/genre/:genre', (req,res)=> {
       })
 })
 
+
+app.get('/userProfile/:userId', (req,res) => {
+  const userId = req.params.userId
+  queries.getUserInfo(userId)
+  .then(userData => {
+    res.render('profile', {
+      userData: userData,
+      currentUser: currentUser
+    })
+  })
+})
+
+
+app.post('/story/:title/comment', (req,res) => {
+  const title = req.params.title;
+  const theComment = req.body;
+  // res.send(theComment)
+  queries.postComment(theComment).then(commentData=>{
+    res.redirect('/')
+
+  })
+})
+
+
 app.get('/:logout', (req, res) => {
   loggedIn = false
   queries.getGenres()
@@ -134,27 +167,7 @@ app.get('/:logout', (req, res) => {
     })
 })
 
-app.get('/userProfile/:userId', (req,res) => {
-  const userId = req.params.userId
-  queries.getUserInfo(userId)
-  .then(userData => {
-    // res.send(userData)
-    res.render('profile', {
-      userData: userData,
-      currentUser: currentUser
-    })
-  })
-})
 
-app.post('/story/:title/comment', (req,res) => {
-  const title = req.params.title;
-  const theComment = req.body;
-  // res.send(theComment)
-  queries.postComment(theComment).then(commentData=>{
-    res.redirect('/')
-
-  })
-})
 
 app.listen(port, () => {
   console.log('Listening on port:', port);

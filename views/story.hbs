@@ -8,32 +8,39 @@
   </head>
 
   <body>
+<!--
     <aside class="create-login profileHome">
       {{#if loggedIn}}
-      <a href="/userProfile/{{currentUser.id}}"><button type="button" name="button">My Profile</button></a>
-      <form action="/:logout" method="get">
-        <a href=""><button type="button" name="button">Logout</button></a>
-      </form>
-      <span>{{currentUser.username}}</span>
-      {{else}}
-      <a href="/login"><button type="button" name="button">Create Account</button></a>
-      <a href="/login"><button type="button" name="button">Login</button></a>
-      {{/if}}
-    </aside>
+        <a href="/userProfile/{{currentUser.id}}"><button type="button" name="button">My Profile</button></a>
+        <form action="/:logout" method="get">
+          <a href=""><button type="button" name="button">Logout</button></a>
+        </form>
+        <span>{{currentUser.username}}</span>
+        {{else}}
+        <a href="/login"><button type="button" name="button">Create Account</button></a>
+        <a href="/login"><button type="button" name="button">Login</button></a>
+        {{/if}}
+    </aside> -->
+
 
     <a href="/">
     <img class="logo-text" src="/images/fableText.png" alt=""></a>
+
     <div class="storyInfo">
       <h1>{{theStory.title}}</h1>
       <h5>by {{theStory.username}}</h5>
       <p>{{theStory.story}}</p>
     </div>
+
+<div class='comment'>
     <h5>Add a Comment</h5>
-    <form class="" action="/story/{{theStory.title}}/comment" method="post">
+    <form class="commentForm" action="/story/{{theStory.title}}/comment" method="post">
       <textarea class="commentArea" name="comment"></textarea>
       <input type="hidden" value="{{storyData.id}}" name="story_id">
       <button type="submit">submit</button>
     </form>
+</div>
+
     <div class="storyInfo">
       <h5>Comments</h5>
       {{#each commentData}}

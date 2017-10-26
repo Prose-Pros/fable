@@ -37,6 +37,7 @@ function newStory(story) {
   return db('stories').insert(story).returning('*')
 }
 
+
 function getUserInfo(id) {
   return db('users').select().where('users.id', id).innerJoin('stories', 'user_id', 'users.id').innerJoin('genres', "genres.id", 'genre_id')
 }

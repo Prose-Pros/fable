@@ -6,7 +6,12 @@
     <link rel="stylesheet" href="../stylesheets/style.css">
   </head>
   <body>
-    <aside class="create-login profileHome">
+
+
+<!-- <div class='dropdown create-login'>
+    <aside class="dropdownPosFix profileHome">
+      <button class='dropMenu'>Menu</button>
+        <div class='dropdown-content'>
       {{#if loggedIn}}
       <a href="/userProfile/{{currentUser.id}}"><button type="button" name="button">My Profile</button></a>
       <form action="/:logout" method="get">
@@ -17,7 +22,11 @@
       <a href="/login"><button type="button" name="button">Create Account</button></a>
       <a href="/login"><button type="button" name="button">Login</button></a>
       {{/if}}
+    </div>
     </aside>
+  </div> -->
+
+
     <a href="/">
     <img class="logo-text" src="/images/fableText.png" alt=""></a>
     <h2>{{genre}}</h2>
@@ -31,7 +40,6 @@
       </a>
       {{/each}}
     </div>
-    <!-- see all stories under one genre -->
 <script src='app.js'></script>
   </body>
 </html>
