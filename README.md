@@ -5,7 +5,7 @@
 
 [Visit Fable](https://prosepros-fable.herokuapp.com/)
 
-#### Contributor
+#### Contributors
 * Beth Jaworski
 * Dakota Pfeifer
 * Mike Williams
