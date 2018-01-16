@@ -1,12 +1,14 @@
 const express = require('express');
+const cookieSession = require('cookie-session')
 const bodyParser = require('body-parser')
 const app = express();
 const port = process.env.PORT || 3000;
 const queries = require('./db/queries')
 const routes = require('./routes/createLogin')
+const cookieParser = require('cookie-parser')
+
 const methodOverride = require('method-override')
 
-let loggedIn = false;
 let currentUser = "";
 
 app.set('view engine', 'hbs');
@@ -14,17 +16,25 @@ app.use(express.static('public'))
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(methodOverride('_method'))
+app.use(cookieParser())
+app.use(cookieSession({
+  name: 'fable',
+  keys: ['kittykittykitty'],
+
+  // Cookie Options
+  maxAge: 24 * 60 * 60 * 1000 // 24 hours
+}))
 
 
 
 app.get('/', (req,res) => {
   queries.getGenres()
     .then(dataGenres => {
+      // console.log(req.session)
       res.render('index', {
         title: 'Fable',
         dataGenres: dataGenres,
-        loggedIn: loggedIn,
-        currentUser: currentUser
+        currentUser: req.session.user
       })
     })
 })
@@ -48,8 +58,7 @@ app.post('/login/user', (req,res)=>{
   queries.login(username)
   .then(userInfo => {
     if(userInfo[0].code == code) {
-      loggedIn = true;
-      currentUser = userInfo[0]
+      req.session.user = userInfo[0]
       res.redirect('/')
     } else {
       res.sendStatus(401);
@@ -60,6 +69,11 @@ app.post('/login/user', (req,res)=>{
   })
 })
 
+app.get('/logout/user', (req, res) => {
+  req.session = null
+  // console.log(req.session);
+  res.redirect('/')
+})
 
 app.get('/login', (req,res)=>{
   res.render('login')
@@ -108,18 +122,6 @@ app.get('/genre/:genre', (req,res)=> {
       })
 })
 
-app.get('/:logout', (req, res) => {
-  loggedIn = false
-  queries.getGenres()
-    .then(dataGenres => {
-      res.render('index', {
-        title: 'Fable',
-        dataGenres: dataGenres,
-        loggedIn: loggedIn
-      })
-    })
-})
-
 app.get('/userProfile/:userId', (req,res) => {
   const userId = req.params.userId
   queries.getUserInfo(userId)
@@ -128,6 +130,16 @@ app.get('/userProfile/:userId', (req,res) => {
       userData: userData,
       currentUser: currentUser
     })
+  })
+})
+
+app.post('/story/:title/comment', (req,res) => {
+  const title = req.params.title;
+  const theComment = req.body;
+  // res.send(theComment)
+  queries.postComment(theComment).then(commentData=>{
+    res.redirect('/')
+
   })
 })
 
