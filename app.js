@@ -26,6 +26,7 @@ app.use(cookieSession({
 }))
 
 
+
 app.get('/', (req,res) => {
   queries.getGenres()
     .then(dataGenres => {
@@ -68,7 +69,6 @@ app.post('/login/user', (req,res)=>{
   })
 })
 
-
 app.get('/logout/user', (req, res) => {
   req.session = null
   // console.log(req.session);
@@ -78,7 +78,6 @@ app.get('/logout/user', (req, res) => {
 app.get('/login', (req,res)=>{
   res.render('login')
 })
-
 
 app.get('/write', (req,res) => {
   queries.getGenres()
@@ -90,36 +89,23 @@ app.get('/write', (req,res) => {
   })
 })
 
-app.get('/story/:title', (req,res) => {
-  const storyId = req.params.title;
+app.get('/story/:id', (req,res) => {
+  const storyId = req.params.id;
   queries.getStoryById(storyId)
   .then(theStory => {
-    const title = theStory[0]['title']
-    queries.getComment(title)
-    .then(commentData => {
-      queries.getStoryByTitle(storyId)
-      .then(storyData=>{
-        // res.send(storyData)
-        res.render('story', {
-          title: theStory[0].title,
-          theStory: theStory[0],
-          currentUser: currentUser,
-          commentData: commentData,
-          storyData: storyData[0]
-
-        })
-
-      })
-      // res.send(commentData)
+    // res.send(theStory)
+    res.render('story', {
+      title: theStory[0].title,
+      theStory: theStory[0],
+      currentUser: currentUser
     })
   })
 })
 
-
 app.post('/write/createStory', (req,res) => {
   queries.newStory(req.body)
   .then(function(story){
-    res.redirect('/story/' + story[0].title)
+    res.redirect('/story/' + story[0].id)
     })
 })
 
@@ -131,12 +117,10 @@ app.get('/genre/:genre', (req,res)=> {
       .then(writers => {
         res.render('genre', {
           genre: genre,
-          writers: writers,
-          currentUser: currentUser
+          writers: writers
         })
       })
 })
-
 
 app.get('/userProfile/:userId', (req,res) => {
   const userId = req.params.userId
@@ -149,7 +133,6 @@ app.get('/userProfile/:userId', (req,res) => {
   })
 })
 
-
 app.post('/story/:title/comment', (req,res) => {
   const title = req.params.title;
   const theComment = req.body;
@@ -159,7 +142,6 @@ app.post('/story/:title/comment', (req,res) => {
 
   })
 })
-
 
 app.listen(port, () => {
   console.log('Listening on port:', port);
